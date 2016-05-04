@@ -1,0 +1,73 @@
+/*
+Theme Name: R2D2
+Description: Used to style the TinyMCE editor.
+Child Theme of: Twenty Thirteen
+*/
+
+
+
+/* Reset of post format background colour in editor 
+Twenty Thirteen colours don't conform to child theme colours
+-------------------------------------------------------------- */
+
+.post-format-aside,
+.post-format-audio,
+.post-format-chat,
+.post-format-gallery,
+.post-format-image,
+.post-format-link,
+.post-format-quote,
+.post-format-status,
+.post-format-video {
+    background-color: #fff;
+}
+
+
+.post-format-aside,
+.post-format-audio,
+.post-format-chat,
+.post-format-gallery,
+.post-format-image,
+.post-format-link,
+.post-format-quote,
+.post-format-status,
+.post-format-video {
+	color: #141412;
+}
+
+/**
+ * 4.0 Links
+ * ----------------------------------------------------------------------------
+ */
+
+a {
+	color: #5465c5;
+	text-decoration: none;
+}
+
+.post-format-aside a,
+.post-format-audio a,
+.post-format-chat a,
+.post-format-gallery a,
+.post-format-image a,
+.post-format-link a,
+.post-format-quote a,
+.post-format-status a,
+.post-format-video a {
+	color: #5465c5;
+}
+
+a:visited {
+	color: #6B75AE;
+}
+
+a:focus {
+	outline: thin dotted;
+}
+
+a:active,
+a:hover {
+	color: #5465c5;
+	outline: 0;
+	text-decoration: underline;
+}

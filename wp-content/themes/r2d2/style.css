@@ -1,0 +1,619 @@
+/*
+Theme Name: r2d2
+Theme URI: http://robertdall.com/r2d2-theme/
+Description: R2D2 is a child theme of the beautiful Twenty Thirteen. The Twenty Thirteen brings WordPress default theme back to blogging. While I adore the typography and it's responsive design I needed something darker and to keep the post titles above the content.
+Author: Robert Dall
+Author URI: http://www.robertdall.com
+Template: twentythirteen
+Version: 1.1.9
+
+
+Version: 2.4.2
+License: GNU General Public License
+License URI: license.txt
+Tags: black, orange, dark, custom-menu, custom-colors, custom-header, featured-images, flexible-width, editor-style, post-formats, threaded-comments, sticky-post, rtl-language-support
+*/
+
+/* Imports */
+@import url("../twentythirteen/style.css");
+
+body {
+	color: #E7DED4; /* Text Color */
+	background: #2A1600; /* Default Background of the browser beyond 2200px */
+}
+
+.site {
+	background-color: #2A1600; /* Default Background of the site */
+	max-width: 2200px;
+	border-left: 0px solid #F2F2F2 !important;
+    border-right: 0px solid #F2F2F2 !important;	
+}
+
+
+/* Default site background
+/* Max width changed to 2200 
+/* to provide support for 27in monitors 
+-------------------------------------------------------------- */
+
+.site-title {
+    font-weight: bold;
+    line-height: 1;
+    margin: 0;
+    padding: 58px 0 10px;
+}
+
+.site-description {
+	font-weight: 400;
+	line-height: 1;
+	margin: 0px;
+}
+
+.site-header .home-link {
+    color: #cd8540;
+}
+
+.site-header {
+	background-repeat: repeat !important;
+	background-size: 2200px !important;
+}
+
+
+/* Entry styles, see bottom of page for Post Format
+-------------------------------------------------------------- */
+ 
+.entry-header, .entry-content, .entry-summary {
+    margin: 0 auto;
+    max-width: 645px;
+    width: 100%;
+    }
+    
+.entry-meta {
+    margin: 10px auto;
+    max-width: 645px;
+    width: 100%;
+}
+
+.entry-meta a {
+	color: #5B66A5;
+}
+
+.entry-meta a:hover {
+	color: #5C6BCD;
+	text-decoration: underline;
+
+}
+    
+.entry-title a {
+    color: #AF7556;
+}
+
+.entry-content a, 
+.comment-content a {
+    color: #6b75ae;
+}
+
+.entry-content a:hover, 
+.comment-content a:hover {
+	color: #5C6BCD;
+    text-decoration: underline;
+}
+
+.entry-content .page-links a,
+.page-links a {
+    border:none;
+    color: #2A1600;
+    background:#AF7556;
+    padding: 5px 11px;
+    text-decoration: none; 
+}
+
+.entry-content .page-links a:hover,
+.page-links a:hover {
+    border:none;
+    color: #2A1600;
+    background:#5C6BCD;
+    padding: 5px 11px;
+    text-decoration: none; 
+}
+
+.page-links a, .page-links > span {
+    background: none repeat scroll 0 0 #493D31;
+    border: 0px solid #FFFFFF;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.paging-navigation .meta-nav {
+    background-color: #AF7556;
+    border-radius: 50% 50% 50% 50%;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 26px;
+    padding: 3px 0 8px;
+    text-align: center;
+    width: 50px;
+}
+
+.page-header {
+    background-color: #493D31;   
+}
+
+.comment-author .fn {
+	word-wrap: break-word;
+}
+
+del {
+    color: #A19587;
+}
+
+
+/* Navigation Bar Style 
+-------------------------------------------------------------- */
+.navbar {
+	max-width: 2200px;
+	color: #E7DED4; 
+}
+
+.nav-menu .current_page_item > a, 
+.nav-menu .current_page_ancestor > a, 
+.nav-menu .current-menu-item > a, 
+.nav-menu .current-menu-ancestor > a {
+    color: #BC360A;
+    font-style: italic;
+}
+
+ul.nav-menu ul a:hover, .nav-menu ul ul a:hover {
+    background-color: #AF7556;
+}
+
+/* Mobile Menu */
+
+h3.menu-toggle {
+	color: #AF7556;
+}
+
+
+/* Image Captions style
+-------------------------------------------------------------- */
+
+.wp-caption .wp-caption-text, .entry-caption, .gallery-caption {
+    color: #E7DED4;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.wp-caption img {
+}
+
+body.single p.single-excerpt-caption {
+	margin: 0 0 0 3%;
+	
+	color: #E7DED4;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+body.single p.single-excerpt-caption a {
+	color: #5B66A5;
+}
+
+body.single p.single-excerpt-caption a:hover {
+	color: #5C6BCD;
+}
+
+
+/* Comments
+-------------------------------------------------------------- */
+
+#comments a {
+	color:#5C6BCD;
+}
+
+#comments a:hover {
+	color:#5C6BCD;
+	text-decoration: underline;
+}
+
+
+/* Sidebar Style
+-------------------------------------------------------------- */
+
+.widget {
+    background-color: rgba(34, 14, 16, 0.8);
+    font-size: 14px;
+    margin: 0 0 24px;
+    padding: 20px;
+}
+
+.widget a {
+	color:#5b66a5;
+}
+
+.widget a:hover {
+	color:#5C6BCD;
+}
+
+.widget div#calendar_wrap table#wp-calendar tbody tr td a {
+	color: #000;
+}
+
+/* Footer Sidebar */
+
+.site-footer .widget a {
+    color: #5B66A5;
+}
+
+.site-footer .widget a:hover {
+    color: #5B66A5;
+	text-decoration: underline;
+}
+
+/* Author note: Even though it is in the footer it is still a widget */
+
+
+/* Archive & Category Headers
+-------------------------------------------------------------- */
+
+.archive-header {
+	background-color: #2A1600;
+}
+
+
+/* Home page styles
+-------------------------------------------------------------- */
+
+.home .entry-thumbnail {
+	width: 300px;
+	margin-right: 15px;
+	}
+
+.home .entry-thumbnail img {
+	border: 1px solid #000;
+    }
+    
+
+/* Post Navigation 
+-------------------------------------------------------------- */
+
+.post-navigation {
+    background-color: #493D31;
+}
+
+
+/* Reply / Comment Area
+-------------------------------------------------------------- */
+
+button, input, textarea {
+    background-color: #f3eee9;
+    border: 2px solid #D4D0BA;
+    font-family: inherit;
+    padding: 5px;
+}
+
+#respond {
+    background-color: #2A1600;
+    border-top: 1px solid #666;
+    padding: 30px 0;
+}
+
+.form-allowed-tags {
+	display: none;
+}
+
+button, input[type="submit"], input[type="button"], input[type="reset"] {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: linear-gradient(to bottom, #E05D22 0%, #D94412 100%) repeat scroll 0 0 transparent;
+    border-color: -moz-use-text-color -moz-use-text-color #B93207;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: none none solid;
+    border-width: medium medium 3px;
+    color: #FFFFFF;
+    display: inline-block;
+    padding: 11px 24px 10px;
+    text-decoration: none;
+}
+
+/* Buttons */ 
+
+.r2d2-button {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e05e22), color-stop(1, #d94412) );
+	background:-moz-linear-gradient( center top, #e05e22 5%, #d94412 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e05e22', endColorstr='#d94412');
+	background-color:#e05e22;
+	text-indent:0;
+	border:1px solid #b93107;
+	display:inline-block;
+	color:#ffffff;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:50px;
+	line-height:50px;
+	text-decoration:none;
+	text-align:center;
+	margin: 0 5px;
+	padding:0px 15px;
+}
+
+.r2d2-button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d94412), color-stop(1, #e05e22) );
+	background:-moz-linear-gradient( center top, #d94412 5%, #e05e22 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d94412', endColorstr='#e05e22');
+	background-color:#d94412;
+}
+
+.r2d2-button:active {
+	position:relative;
+	top:1px;
+}
+
+
+/* Attachment Page
+-------------------------------------------------------------- */
+
+.attachment .hentry {
+    background-color: #2A1600;
+}
+
+.image-attachment .entry-content {
+	background-color: #000000;
+}
+
+.entry-content nav#image-navigation.navigation span.nav-previous a:hover,
+.entry-content nav#image-navigation.navigation span.nav-next a:hover {
+	background: none;
+}
+
+.entry-description {
+	display: none;
+}
+
+.attachment .entry-meta {
+    max-width: 700px;
+}
+
+
+/* Footer Style
+-------------------------------------------------------------- */
+
+footer.entry-meta a {
+	color: #5C6BCD;
+}
+
+footer.entry-meta a:hover {
+	color: #5C6BCD;
+}
+
+.site-footer {
+    background-color: #493D31;
+    color: #84826F;
+    font-size: 14px;
+    text-align: center;
+}
+
+.site-footer a {
+	color: #84826F;
+}
+
+.site-footer a:hover {
+	color: #84826F;
+	text-decoration: underline;
+}
+
+
+/* 404 page style 
+-------------------------------------------------------------- */
+
+.error404 .page-header {
+    background-color: #2A1600;
+}
+
+.error404 .page-wrapper {
+    background-color: #2A1600;
+}
+
+
+/*   Specific Post Format Style 
+-------------------------------------------------------------- */
+
+
+.format-status .entry-content a, 
+.format-gallery .entry-content a, 
+.format-chat .entry-content a, 
+.format-quote .entry-content a {
+    border: 0px;
+    color: #5C6BCD;
+}
+
+.format-gallery .entry-content a:hover, 
+.format-audio .entry-content a:hover, 
+.format-status .entry-content a:hover, 
+.format-video .entry-content a:hover, 
+.format-chat .entry-content a:hover, 
+.format-quote .entry-content a:hover {
+    color: #5C6BCD !important;
+    text-decoration: underline;
+    border: 0px;
+}
+
+
+/* The above styles apply to all post formats */
+
+/* Formats Standard Post */
+
+article.format-standard .entry-meta a {
+	color: #5b66a5;
+}
+
+article.format-standard .entry-meta a:hover {
+	color: #5C6BCD;
+}
+
+.entry-meta span.tags-links {
+    color: #5C6BCD;
+}
+
+/* Formats Single Image */
+
+article.format-image {
+	background-color: #000;
+}
+
+article.format-image .entry-title {
+    font-size: 34px;
+    font-weight: bold;
+}
+
+article.format-image .entry-content div {
+	margin-bottom: 20px;	
+}
+
+article.format-image .entry-media img {
+	border: 1px solid #000;
+}
+
+/* Formats Quote */
+
+
+.format-quote blockquote:before {
+	color: #AF7556;
+}
+
+.format-quote .quote:before {
+	color: #AF7556;
+}
+
+.format-quote .entry-content figcaption.quote-caption,
+.format-quote .entry-content figcaption.quote-caption a  {
+	color: #AF7556;
+}
+
+.format-quote .entry-content h1.entry-title a {
+    color: #AF7556;
+}
+
+.format-quote .entry-content h1.entry-title a:hover {
+	color: #EA9629;
+	text-decoration: underline;
+}
+
+.format-quote .entry-content small, .format-quote .entry-content cite {
+    display: block;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.format-quote .entry-meta a {
+    color: #5B66A5;
+}
+
+.format-quote .entry-content a:hover {
+    color: #E6402E;
+}
+
+/* Formats Gallery */
+
+.format-gallery  h1.entry-title {
+	color: #AF7556;
+}
+
+.format-gallery .entry-content p {
+	color: #E7DED4;	
+}
+
+.format-gallery .entry-meta a, 
+.format-gallery .entry-content a {
+    color: #6B75AE;
+}
+
+/* Formats Asides */
+
+.format-aside {
+    background-color:#5C3820;
+}
+
+.format-aside .entry-content p {
+	color: #E7DED4;
+}
+
+.format-aside .entry-content .date a {
+	color: #3F4CAC;
+}
+
+.format-aside .entry-content .date a:hover {
+	color: #3F4CAC;
+}
+
+/* Formats Chat */
+
+.format-chat .entry-header h1.entry-title {
+	color: #AF7556;
+}
+
+.format-chat .entry-content {
+	color: #141412;
+}
+
+.format-chat .entry-meta a {
+	color: #3F4CAC;
+}
+
+.format-chat .entry-meta a:hover {
+	color: #3F4CAC;
+}
+
+/* Formats Link */
+
+.format-link .entry-content p {
+    color: #141412;
+}
+
+.format-link .entry-content p a {
+ 	color: #5C6BCD;
+}
+
+/* Formats Status */
+
+.format-status .entry-meta {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 40px;
+}
+
+.format-status {
+    background-color:#A37962;
+}
+
+.format-status .entry-meta a:hover {
+	color: #EA9629;
+}
+
+/* Formats Video */
+
+.format-video {
+    background-color: #220E10;
+}
+
+.format-video .entry-meta span.tags-links {
+    color: #FBFAF3;
+}
+
+/* Formats Audio */
+
+.format-audio .entry-title a {
+	color: #FBFAF3;
+}
+
+/* Formats Gallery */
+
+.format-gallery {
+    background-color: #000;
+}
