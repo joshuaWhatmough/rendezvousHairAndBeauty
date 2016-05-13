@@ -31,6 +31,7 @@ if ( !function_exists('generate_get_default_fonts') && !function_exists('generat
 			'site_title_font_weight' => 'bold',
 			'site_title_font_transform' => 'none',
 			'site_title_font_size' => '45',
+			'mobile_site_title_font_size' => '30',
 			'font_site_tagline' => 'inherit',
 			'site_tagline_font_weight' => 'normal',
 			'site_tagline_font_transform' => 'none',
@@ -48,10 +49,12 @@ if ( !function_exists('generate_get_default_fonts') && !function_exists('generat
 			'heading_1_weight' => '300',
 			'heading_1_transform' => 'none',
 			'heading_1_font_size' => '40',
+			'mobile_heading_1_font_size' => '30',
 			'font_heading_2' => 'inherit',
 			'heading_2_weight' => '300',
 			'heading_2_transform' => 'none',
 			'heading_2_font_size' => '30',
+			'mobile_heading_2_font_size' => '25',
 			'font_heading_3' => 'inherit',
 			'heading_3_weight' => 'normal',
 			'heading_3_transform' => 'none',
@@ -60,7 +63,7 @@ if ( !function_exists('generate_get_default_fonts') && !function_exists('generat
 			'heading_4_weight' => 'normal',
 			'heading_4_transform' => 'none',
 			'heading_4_font_size' => '15',
-			'footer_font_size' => '17'
+			'footer_font_size' => '16'
 		);
 		
 		return apply_filters( 'generate_font_option_defaults', $generate_font_defaults );
@@ -96,32 +99,32 @@ if ( !function_exists('generate_get_default_fonts') && !function_exists('generat
 			// Body font
 			'body, button, input, select, textarea' => array(
 				'font-family' => $body_family,
-				'font-weight' => $generate_settings['body_font_weight'],
-				'text-transform' => $generate_settings['body_font_transform'],
+				'font-weight' => 'normal' == $generate_settings['body_font_weight'] ? '' : $generate_settings['body_font_weight'],
+				'text-transform' => 'none' == $generate_settings['body_font_transform'] ? '' : $generate_settings['body_font_transform'],
 				'font-size' => $generate_settings['body_font_size'] . 'px'
 			),
 			
 			// Main title font
 			'.main-title' => array(
 				'font-family' => $site_title_family,
-				'font-weight' => $generate_settings['site_title_font_weight'],
-				'text-transform' => $generate_settings['site_title_font_transform'],
+				'font-weight' => 'normal' == $generate_settings['site_title_font_weight'] ? '' : $generate_settings['site_title_font_weight'],
+				'text-transform' => 'none' == $generate_settings['site_title_font_transform'] ? '' : $generate_settings['site_title_font_transform'],
 				'font-size' => $generate_settings['site_title_font_size'] . 'px'
 			),
 			
 			// Main tagline font
 			'.site-description' => array(
 				'font-family' => $site_tagline_family,
-				'font-weight' => $generate_settings['site_tagline_font_weight'],
-				'text-transform' => $generate_settings['site_tagline_font_transform'],
+				'font-weight' => 'normal' == $generate_settings['site_tagline_font_weight'] ? '' : $generate_settings['site_tagline_font_weight'],
+				'text-transform' => 'none' == $generate_settings['site_tagline_font_transform'] ? '' : $generate_settings['site_tagline_font_transform'],
 				'font-size' => $generate_settings['site_tagline_font_size'] . 'px'
 			),
 			
 			// Navigation font
 			'.main-navigation a, .menu-toggle' => array(
 				'font-family' => $navigation_family,
-				'font-weight' => $generate_settings['navigation_font_weight'],
-				'text-transform' => $generate_settings['navigation_font_transform'],
+				'font-weight' => 'normal' == $generate_settings['navigation_font_weight'] ? '' : $generate_settings['navigation_font_weight'],
+				'text-transform' => 'none' == $generate_settings['navigation_font_transform'] ? '' : $generate_settings['navigation_font_transform'],
 				'font-size' => $generate_settings['navigation_font_size'] . 'px'
 			),
 			
@@ -132,8 +135,8 @@ if ( !function_exists('generate_get_default_fonts') && !function_exists('generat
 			// Widget title font
 			'.widget-title' => array(
 				'font-family' => $widget_family,
-				'font-weight' => $generate_settings['widget_title_font_weight'],
-				'text-transform' => $generate_settings['widget_title_font_transform'],
+				'font-weight' => 'normal' == $generate_settings['widget_title_font_weight'] ? '' : $generate_settings['widget_title_font_weight'],
+				'text-transform' => 'none' == $generate_settings['widget_title_font_transform'] ? '' : $generate_settings['widget_title_font_transform'],
 				'font-size' => $generate_settings['widget_title_font_size'] . 'px'
 			),
 			
@@ -145,25 +148,30 @@ if ( !function_exists('generate_get_default_fonts') && !function_exists('generat
 			// Heading 1 font
 			'h1' => array(
 				'font-family' => $h1_family,
-				'font-weight' => $generate_settings['heading_1_weight'],
-				'text-transform' => $generate_settings['heading_1_transform'],
+				'font-weight' => 'normal' == $generate_settings['heading_1_weight'] ? '' : $generate_settings['heading_1_weight'],
+				'text-transform' => 'none' == $generate_settings['heading_1_transform'] ? '' : $generate_settings['heading_1_transform'],
 				'font-size' => $generate_settings['heading_1_font_size'] . 'px'
 			),
 			
 			// Heading 2 font
 			'h2' => array(
 				'font-family' => $h2_family,
-				'font-weight' => $generate_settings['heading_2_weight'],
-				'text-transform' => $generate_settings['heading_2_transform'],
+				'font-weight' => 'normal' == $generate_settings['heading_2_weight'] ? '' : $generate_settings['heading_2_weight'],
+				'text-transform' => 'none' == $generate_settings['heading_2_transform'] ? '' : $generate_settings['heading_2_transform'],
 				'font-size' => $generate_settings['heading_2_font_size'] . 'px'
 			),
 			
 			// Heading 3 font
 			'h3' => array(
 				'font-family' => $h3_family,
-				'font-weight' => $generate_settings['heading_3_weight'],
-				'text-transform' => $generate_settings['heading_3_transform'],
+				'font-weight' => 'normal' == $generate_settings['heading_3_weight'] ? '' : $generate_settings['heading_3_weight'],
+				'text-transform' => 'none' == $generate_settings['heading_3_transform'] ? '' : $generate_settings['heading_3_transform'],
 				'font-size' => $generate_settings['heading_3_font_size'] . 'px'
+			),
+			
+			// Footer font
+			'.site-info' => array(
+				'font-size' => $generate_settings['footer_font_size'] . 'px'
 			)
 			
 		);
@@ -190,7 +198,24 @@ if ( !function_exists('generate_get_default_fonts') && !function_exists('generat
 			if($elements_added > 0)
 				$output .= $temporary_output;
 		}
-
+		
+		$mobile = apply_filters( 'generate_mobile_breakpoint', '768px' );
+		$mobile_site_title = ( isset( $generate_settings[ 'mobile_site_title_font_size' ] ) ) ? $generate_settings[ 'mobile_site_title_font_size' ] : '30';
+		$mobile_h1 = ( isset( $generate_settings[ 'mobile_heading_1_font_size' ] ) ) ? $generate_settings[ 'mobile_heading_1_font_size' ] : '30';
+		$mobile_h2 = ( isset( $generate_settings[ 'mobile_heading_2_font_size' ] ) ) ? $generate_settings[ 'mobile_heading_2_font_size' ] : '25';
+		$output .= '@media (max-width:' . $mobile . ') {
+			.main-title {
+				font-size: ' . $mobile_site_title . 'px;
+			}
+			h1 {
+				font-size: ' . $mobile_h1 . 'px;
+			}
+			
+			h2 {
+				font-size: ' . $mobile_h2 . 'px;
+			}
+		}';
+		$output = str_replace(array("\r", "\n", "\t"), '', $output);
 		return $output;
 	}
 	
@@ -319,7 +344,7 @@ if ( ! function_exists( 'generate_fonts_customize_register' ) ) :
 			'font_section',
 			// Arguments array
 			array(
-				'title' => __( 'Typography', 'generate' ),
+				'title' => __( 'Typography', 'generatepress' ),
 				'capability' => 'edit_theme_options',
 				'description' => '',
 				'priority' => 30
@@ -341,7 +366,7 @@ if ( ! function_exists( 'generate_fonts_customize_register' ) ) :
 				$wp_customize, 
 				'google_font_body_control', 
 				array(
-					'label' => __('Body','generate'),
+					'label' => __('Body','generatepress'),
 					'section' => 'font_section',
 					'settings' => 'generate_settings[font_body]',
 					'priority' => 1
@@ -363,7 +388,7 @@ if ( ! function_exists( 'generate_fonts_customize_register' ) ) :
 				$wp_customize, 
 				'body_font_weight_control', 
 				array(
-					'label' => __('Font weight','generate'),
+					'label' => __('Font weight','generatepress'),
 					'section' => 'font_section',
 					'settings' => 'generate_settings[body_font_weight]',
 					'priority' => 20,
@@ -387,7 +412,7 @@ if ( ! function_exists( 'generate_fonts_customize_register' ) ) :
 				$wp_customize, 
 				'body_font_transform_control', 
 				array(
-					'label' => __('Text transform','generate'),
+					'label' => __('Text transform','generatepress'),
 					'section' => 'font_section',
 					'settings' => 'generate_settings[body_font_transform]',
 					'priority' => 30,
@@ -410,7 +435,7 @@ if ( ! function_exists( 'generate_fonts_customize_register' ) ) :
 				$wp_customize, 
 				'generate_settings[body_font_size]', 
 				array(
-					'label' => __('Font size','generate'),
+					'label' => __('Font size','generatepress'),
 					'section' => 'font_section',
 					'settings' => 'generate_settings[body_font_size]',
 					'priority' => 40
@@ -427,14 +452,14 @@ if ( ! function_exists( 'generate_fonts_customize_register' ) ) :
 					array(
 						'section'     => 'font_section',
 						'type'        => 'addon',
-						'label'			=> __( 'More Settings','generate' ),
+						'label'			=> __( 'More Settings','generatepress' ),
 						'url' => 'http://www.generatepress.com/downloads/generate-typography/',
 						'description' => sprintf(
-							__( 'Looking to add more typography settings?<br /> %s.', 'generate' ),
+							__( 'Looking to add more typography settings?<br /> %s.', 'generatepress' ),
 							sprintf(
 								'<a href="%1$s" target="_blank">%2$s</a>',
 								esc_url( 'http://www.generatepress.com/downloads/generate-typography/' ),
-								__( 'Check out Generate Typography', 'generate' )
+								__( 'Check out Generate Typography', 'generatepress' )
 							)
 						),
 						'priority'    => 50
@@ -642,7 +667,7 @@ function generate_get_font_family_css( $font, $settings, $default )
 	endif;
 	
 	// Output the CSS
-	$output = ( 'inherit' == $font_family ) ? 'inherit' : $wrapper_start . $font_family . $wrapper_end;
+	$output = ( 'inherit' == $font_family ) ? '' : $wrapper_start . $font_family . $wrapper_end;
 	return $output;
 }
 endif;

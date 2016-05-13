@@ -3,8 +3,8 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
-Tested up to: 4.3.1
-Stable tag: 4.8.3
+Tested up to: 4.5
+Stable tag: 4.9.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,7 @@ The Google Analytics reports you need, on your dashboard, in your All Posts and 
 - Sessions, organic searches, page views, bounce rate analytics reports
 - Locations, pages, referrers, keywords analytics reports
 - Traffic channels, social networks, traffic mediums, search engines analytics reports
+- Device categories, browsers, operating systems, screen resolutions, mobile brands analytics reports 
 - User access control over analytics reports
 
 = Google Analytics Basic Tracking =
@@ -64,6 +65,7 @@ With Google Analytics Dashboard for WP you can use custom dimensions to track:
 - Authors
 - Publication year
 - Categories
+- Tags
 - User engagement
 
 = Google Analytics Dashboard for WP on Multisite =
@@ -104,11 +106,11 @@ We are constantly improving Google Analytics Dashboard for WP, sometimes the vid
 
 = How can I suggest a new feature, contribute or report a bug? =
 
-You can submit pull requests, feature requests, translations or bug reports on [our GitHub repository](https://github.com/deconf/Google-Analytics-Dashboard-for-WP).
+You can submit pull requests, feature requests and bug reports on [our GitHub repository](https://github.com/deconf/Google-Analytics-Dashboard-for-WP).
 
 = Documentation, Tutorials and FAQ =
 
-For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashboard for WP Documentation](https://deconf.com/google-analytics-dashboard-wordpress/).
+For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashboard for WP documentation](https://deconf.com/google-analytics-dashboard-wordpress/).
 
 == Screenshots ==
 
@@ -124,28 +126,75 @@ For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashbo
 
 == Localization ==
 
-You can help translating this plugin on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
+You can translate Google Analytics Dashboard for WP on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
 
 == License ==
 
 Google Analytics Dashboard for WP it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
+== Upgrade Notice ==
+
 == Changelog ==
 
-= 4.8.3 = 
-- Enhancement: switching to translate.wordpress.org, you can find [more details here](https://deconf.com/moving-translations-to-wordpress-org/)
+= 4.9.3.1 =
+* Bug Fixes:
+	* fixing a bug where &nbsp was displayed instead of a blank space on localized sites
+	
+= 4.9.3 =
+* Enhancements: 
+	* implement more specific error codes
+	* files cleanup
+	* move reports.js and other scripts to footer
+	* on-screen errors instead of using console
+* New Features:
+	* custom dimensions support for Tags	
+	
+= 4.9.2 =
+* Enhancements: 
+	* improved loading speed for charts
+	* add autoloading for Charts Library to allow dequeue on conflicts
+	* removed API Key option, since is not needed anymore
+	* display session values in Pie Chart slices
+	* improved data accuracy for Pie Charts 
 
-= 4.8.2.1 =
-- Bug Fix: blank page on General Settings screen after failing to rebuild the bearer token
-- Enhancement: Italian, Portuguese (Brazil), Hungarian, Arabic, Russian, English (Canada), Romanian translations updated
-- Enhancement: new Localization section
-- Enhancement: small UI updates
+* Bug Fixes:
+	* multiple fixes for frontend widget
+	* page title missing in Realtime report
 
-= 4.8.2 =
-- Bug Fix: use only unique CSS selectors to avoid conflicts with other plugins
-- Bug Fix: don't load unneeded CSS styles on frontend
-- Bug Fix: switch to a new custom made cache system to avoid issues with broken transients
-- Enhancement: rebuild and roll-back to a bearer token
-- Enhancement: Greek translation updated
+* New Features:
+	* brand new Technology Reports with details about Device Categories, Browsers, Operating Systems, Screen Resolutions and Device Brands  
+
+= 4.9.1.2 =
+- Bug Fix: multiple CSS fixes for frontend widget
+- Bug Fix: clean-up output for View selection list
+- Bug Fix: try to fix Google Charts conflicts with other plugins
+- Bug Fix: prevent PHP warnings during authorization and while revoking tokens
+
+= 4.9.1.1 =
+- Bug Fix: focusFlag preventing Real-Time reports from refreshing properly
+- Bug Fix: date format is not properly localized in daily/monthly reports
+- Bug Fix: reports loading issues on WordPress 4.4
+
+= 4.9.1 =
+- Bug Fix: clear_cache method is generating PHP warnings on certain conditions 
+- Bug Fix: make sure Google charts libraries are loaded before rendering
+
+= 4.9.0.1 =
+- Bug Fix: Pages report missing from admin dashboard widget
+- Bug Fix: Invalid response with a -31 error when using a certain combination of backend settings
+
+= 4.9 =
+- Bug Fix: add an unique class to jQuery UI Tooltips to avoid conflicts
+- Bug Fix: multiple CSS improvements
+- Bug Fix: invalid localized date formats
+- Bug Fix: switching between multisite modes doesn't propagate the new network status on all sites
+- Bug Fix: Location Settings ignored in posts/pages reports
+- Enhancement: unset cookies while revoking the authorization or clearing the cache 
+- Enhancement: no more page re-loads on admin dashboard widget when switching between reports
+- Enhancement: unified reporting system with real-time capabilities
+- Enhancement: new tracking options enabling you to customize cookieName, cookieDomain, cookieExpires; props by [Martins Sipenko](https://github.com/martinssipenko) 
+- Enhancement: display update notices only to admins and only on dashboard
+- Enhancement: force language packs updates for all available languages on a Network
+- Enhancement: added View switch capabilities
 
 The full changelog is [available here](https://deconf.com/changelog-google-analytics-dashboard-for-wp/).

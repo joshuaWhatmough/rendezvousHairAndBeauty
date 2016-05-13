@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Contact Form to Email
-Plugin URI: http://wordpress.dwbooster.com/forms/contact-form-to-email
+Plugin URI: http://form2email.dwbooster.com/download
 Description: Contact form that sends the data to email and also to a database list and CSV file.
-Version: 1.1.14
+Version: 1.1.36
 Author: CodePeople.net
 Author URI: http://codepeople.net
 Text Domain: contact-form-to-email
@@ -34,8 +34,8 @@ define('CP_CFEMAIL_DEFAULT_vs_text_datemmddyyyy', 'Please enter a valid date wit
 define('CP_CFEMAIL_DEFAULT_vs_text_dateddmmyyyy', 'Please enter a valid date with this format(dd/mm/yyyy)');
 define('CP_CFEMAIL_DEFAULT_vs_text_number', 'Please enter a valid number.');
 define('CP_CFEMAIL_DEFAULT_vs_text_digits', 'Please enter only digits.');
-define('CP_CFEMAIL_DEFAULT_vs_text_max', 'Please enter a value less than or equal to {0}.');
-define('CP_CFEMAIL_DEFAULT_vs_text_min', 'Please enter a value greater than or equal to {0}.');
+define('CP_CFEMAIL_DEFAULT_vs_text_max', 'Please enter a value less than or equal to %0%.');
+define('CP_CFEMAIL_DEFAULT_vs_text_min', 'Please enter a value greater than or equal to %0%.');
 
 define('CP_CFEMAIL_DEFAULT_cv_enable_captcha', 'true');
 define('CP_CFEMAIL_DEFAULT_cv_width', '180');

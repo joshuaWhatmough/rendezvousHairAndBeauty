@@ -175,8 +175,11 @@ function tonjoo_slideshow_meta( $post )
 
         .meta-subtitle {
             margin: 0px -22px !important;
-            border-top:1px solid rgb(238, 238, 238);
-            background-color:#f6f6f6;
+            border-top: 1px solid #EEE;
+            border-bottom: 1px solid #EEE;
+            background-color: #F6F6F6;
+            padding: 10px;
+            font-size: 14px;        
         }
 
         @media (max-width: 767px) {

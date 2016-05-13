@@ -28,7 +28,10 @@ if ( function_exists( 'generate_blog_get_defaults' ) ) :
 				'author' => 'true',
 				'categories' => 'true',
 				'tags' => 'true',
-				'comments' => 'true'
+				'comments' => 'true',
+				'column_layout' => 0,
+				'columns' => '50',
+				'featured_column' => 0
 			);
 			
 			return $new_defaults;
@@ -47,7 +50,7 @@ function exhibit_reset_customizer_settings() {
 	if ( is_admin() && $pagenow == "themes.php" && isset( $_GET['activated'] ) ) {
 		echo '<div class="updated below-h2">';
 			echo '<p>';
-				_e('<strong>Almost done!</strong> Previous GeneratePress options detected in your database. Please <a href="' . admin_url('themes.php?page=generate-options#gen-delete') . '">click here</a> and delete your current options for new to take full effect.','generate');
+				_e('<strong>Almost done!</strong> Previous GeneratePress options detected in your database. Please <a href="' . admin_url('themes.php?page=generate-options#gen-delete') . '">click here</a> and delete your current options for new to take full effect.','exhibit');
 			echo '</p>';
 		echo '</div>';
 	}
@@ -98,6 +101,7 @@ if ( !function_exists( 'exhibit_exhibit_defaults' ) ) :
 			'nav_layout_setting' => 'fluid-nav',
 			'nav_position_setting' => 'nav-below-header',
 			'nav_search' => 'enable',
+			'nav_dropdown_type' => 'hover',
 			'content_layout_setting' => 'separate-containers',
 			'layout_setting' => 'right-sidebar',
 			'blog_layout_setting' => 'right-sidebar',
@@ -105,6 +109,7 @@ if ( !function_exists( 'exhibit_exhibit_defaults' ) ) :
 			'post_content' => 'full',
 			'footer_layout_setting' => 'fluid-footer',
 			'footer_widget_setting' => '3',
+			'back_to_top' => '',
 			'background_color' => '#9e9e9e',
 			'text_color' => '#3a3a3a',
 			'link_color' => '#1e73be',
@@ -201,6 +206,7 @@ if ( !function_exists('exhibit_get_default_fonts') ) :
 			'site_title_font_weight' => '300',
 			'site_title_font_transform' => 'none',
 			'site_title_font_size' => '78',
+			'mobile_site_title_font_size' => '30',
 			'font_site_tagline' => 'inherit',
 			'site_tagline_font_weight' => '300',
 			'site_tagline_font_transform' => 'none',
@@ -218,10 +224,12 @@ if ( !function_exists('exhibit_get_default_fonts') ) :
 			'heading_1_weight' => '300',
 			'heading_1_transform' => 'none',
 			'heading_1_font_size' => '40',
+			'mobile_heading_1_font_size' => '30',
 			'font_heading_2' => 'inherit',
 			'heading_2_weight' => '300',
 			'heading_2_transform' => 'none',
 			'heading_2_font_size' => '30',
+			'mobile_heading_2_font_size' => '25',
 			'font_heading_3' => 'inherit',
 			'heading_3_weight' => 'normal',
 			'heading_3_transform' => 'none',
@@ -230,6 +238,7 @@ if ( !function_exists('exhibit_get_default_fonts') ) :
 			'heading_4_weight' => 'normal',
 			'heading_4_transform' => 'none',
 			'heading_4_font_size' => '15',
+			'footer_font_size' => '17'
 		);
 		
 		return $exhibit_font_defaults;

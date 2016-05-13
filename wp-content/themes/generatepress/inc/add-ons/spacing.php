@@ -64,17 +64,25 @@ if ( !function_exists('generate_spacing_css') ) :
 		$spacing_css = array (
 		
 			'.inside-header' => array(
-				'padding-top' => ( isset( $spacing_settings['header_top'] ) ) ? $spacing_settings['header_top'] . 'px' : null,
-				'padding-right' => ( isset( $spacing_settings['header_right'] ) ) ? $spacing_settings['header_right'] . 'px' : null,
-				'padding-bottom' => ( isset( $spacing_settings['header_bottom'] ) ) ? $spacing_settings['header_bottom'] . 'px' : null,
-				'padding-left' => ( isset( $spacing_settings['header_left'] ) ) ? $spacing_settings['header_left'] . 'px' : null,
+				'padding' => generate_padding_css( $spacing_settings[ 'header_top' ], $spacing_settings[ 'header_right' ], $spacing_settings[ 'header_bottom' ], $spacing_settings[ 'header_left' ] )
 			),
 			
 			'.separate-containers .inside-article, .separate-containers .comments-area, .separate-containers .page-header, .separate-containers .paging-navigation, .one-container .site-content' => array(
-				'padding-top' => ( isset( $spacing_settings['content_top'] ) ) ? $spacing_settings['content_top'] . 'px' : null,
-				'padding-right' => ( isset( $spacing_settings['content_right'] ) ) ? $spacing_settings['content_right'] . 'px' : null,
-				'padding-bottom' => ( isset( $spacing_settings['content_bottom'] ) ) ? $spacing_settings['content_bottom'] . 'px' : null,
-				'padding-left' => ( isset( $spacing_settings['content_left'] ) ) ? $spacing_settings['content_left'] . 'px' : null,
+				'padding' => generate_padding_css( $spacing_settings[ 'content_top' ], $spacing_settings[ 'content_right' ], $spacing_settings[ 'content_bottom' ], $spacing_settings[ 'content_left' ] )
+			),
+			
+			'.one-container.right-sidebar .site-main,
+			.one-container.both-right .site-main' => array(
+				'margin-right' => ( isset( $spacing_settings['content_right'] ) ) ? $spacing_settings['content_right'] . 'px' : null,
+			),
+			
+			'.one-container.left-sidebar .site-main,
+			.one-container.both-left .site-main' => array(
+				'margin-left' => ( isset( $spacing_settings['content_left'] ) ) ? $spacing_settings['content_left'] . 'px' : null,
+			),
+			
+			'.one-container.both-sidebars .site-main' => array(
+				'margin' => generate_padding_css( '0', $spacing_settings[ 'content_right' ], '0', $spacing_settings[ 'content_left' ] )
 			),
 			
 			'.ignore-x-spacing' => array(
@@ -84,10 +92,7 @@ if ( !function_exists('generate_spacing_css') ) :
 			),
 			
 			'.ignore-xy-spacing' => array(
-				'margin-top' => ( isset( $spacing_settings['content_top'] ) ) ? '-' . $spacing_settings['content_top'] . 'px' : null,
-				'margin-right' => ( isset( $spacing_settings['content_right'] ) ) ? '-' . $spacing_settings['content_right'] . 'px' : null,
-				'margin-bottom' => ( isset( $spacing_settings['content_bottom'] ) ) ? $spacing_settings['content_bottom'] . 'px' : null,
-				'margin-left' => ( isset( $spacing_settings['content_left'] ) ) ? '-' . $spacing_settings['content_left'] . 'px' : null,
+				'margin' => generate_padding_css( '-' . $spacing_settings[ 'content_top' ], '-' . $spacing_settings[ 'content_right' ], $spacing_settings[ 'content_bottom' ], '-' . $spacing_settings[ 'content_left' ] )
 			),
 			
 			'.main-navigation .main-nav ul li a,
@@ -103,10 +108,7 @@ if ( !function_exists('generate_spacing_css') ) :
 			),
 			
 			'.main-navigation .main-nav ul ul li a' => array(
-				'padding-left' => ( isset( $spacing_settings['menu_item'] ) ) ? $spacing_settings['menu_item'] . 'px' : null,
-				'padding-right' => ( isset( $spacing_settings['menu_item'] ) ) ? $spacing_settings['menu_item'] . 'px' : null,
-				'padding-top' => ( isset( $spacing_settings['sub_menu_item_height'] ) ) ? $spacing_settings['sub_menu_item_height'] . 'px' : null,
-				'padding-bottom' => ( isset( $spacing_settings['sub_menu_item_height'] ) ) ? $spacing_settings['sub_menu_item_height'] . 'px' : null,
+				'padding' => generate_padding_css( $spacing_settings[ 'sub_menu_item_height' ], $spacing_settings[ 'menu_item' ], $spacing_settings[ 'sub_menu_item_height' ], $spacing_settings[ 'menu_item' ] )
 			),
 			
 			'.main-navigation ul ul' => array(
@@ -123,60 +125,37 @@ if ( !function_exists('generate_spacing_css') ) :
 				'line-height' => '0px'
 			),
 			
-			'.separate-containers .widget-area .widget' => array(
-				'padding-top' => ( isset( $spacing_settings['widget_top'] ) ) ? $spacing_settings['widget_top'] . 'px' : null,
-				'padding-right' => ( isset( $spacing_settings['widget_right'] ) ) ? $spacing_settings['widget_right'] . 'px' : null,
-				'padding-bottom' => ( isset( $spacing_settings['widget_bottom'] ) ) ? $spacing_settings['widget_bottom'] . 'px' : null,
-				'padding-left' => ( isset( $spacing_settings['widget_left'] ) ) ? $spacing_settings['widget_left'] . 'px' : null,
+			'.widget-area .widget' => array(
+				'padding' => generate_padding_css( $spacing_settings[ 'widget_top' ], $spacing_settings[ 'widget_right' ], $spacing_settings[ 'widget_bottom' ], $spacing_settings[ 'widget_left' ] )
 			),
 			
 			'.footer-widgets' => array(
-				'padding-top' => ( isset( $spacing_settings['footer_widget_container_top'] ) ) ? $spacing_settings['footer_widget_container_top'] . 'px' : null,
-				'padding-right' => ( isset( $spacing_settings['footer_widget_container_right'] ) ) ? $spacing_settings['footer_widget_container_right'] . 'px' : null,
-				'padding-bottom' => ( isset( $spacing_settings['footer_widget_container_bottom'] ) ) ? $spacing_settings['footer_widget_container_bottom'] . 'px' : null,
-				'padding-left' => ( isset( $spacing_settings['footer_widget_container_left'] ) ) ? $spacing_settings['footer_widget_container_left'] . 'px' : null,
+				'padding' => generate_padding_css( $spacing_settings[ 'footer_widget_container_top' ], $spacing_settings[ 'footer_widget_container_right' ], $spacing_settings[ 'footer_widget_container_bottom' ], $spacing_settings[ 'footer_widget_container_left' ] )
 			),
 			
 			'.site-info' => array(
-				'padding-top' => ( isset( $spacing_settings['footer_top'] ) ) ? $spacing_settings['footer_top'] . 'px' : null,
-				'padding-right' => ( isset( $spacing_settings['footer_right'] ) ) ? $spacing_settings['footer_right'] . 'px' : null,
-				'padding-bottom' => ( isset( $spacing_settings['footer_bottom'] ) ) ? $spacing_settings['footer_bottom'] . 'px' : null,
-				'padding-left' => ( isset( $spacing_settings['footer_left'] ) ) ? $spacing_settings['footer_left'] . 'px' : null,
+				'padding' => generate_padding_css( $spacing_settings[ 'footer_top' ], $spacing_settings[ 'footer_right' ], $spacing_settings[ 'footer_bottom' ], $spacing_settings[ 'footer_left' ] )
 			),
 			
 			'.right-sidebar.separate-containers .site-main' => array(
-				'margin-top' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-right' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-bottom' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-left' => '0px',
-				'padding' => '0px'
+				'margin' => generate_padding_css( $spacing_settings[ 'separator' ], $spacing_settings[ 'separator' ], $spacing_settings[ 'separator' ], '0' ),
 			),
 			
 			'.left-sidebar.separate-containers .site-main' => array(
-				'margin-top' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-right' => '0px',
-				'margin-bottom' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-left' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'padding' => '0px'
+				'margin' => generate_padding_css( $spacing_settings[ 'separator' ], '0', $spacing_settings[ 'separator' ], $spacing_settings[ 'separator' ] ),
 			),
 			
 			'.both-sidebars.separate-containers .site-main' => array(
 				'margin' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'padding' => '0px'
 			),
 			
 			'.both-right.separate-containers .site-main' => array(
-				'margin-top' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-right' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-bottom' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-left' => '0px',
-				'padding' => '0px'
+				'margin' => generate_padding_css( $spacing_settings[ 'separator' ], $spacing_settings[ 'separator' ], $spacing_settings[ 'separator' ], '0' ),
 			),
 			
 			'.separate-containers .site-main' => array(
 				'margin-top' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
 				'margin-bottom' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'padding' => '0px'
 			),
 			
 			'.separate-containers .page-header-image, .separate-containers .page-header-content, .separate-containers .page-header-image-single, .separate-containers .page-header-content-single' => array(
@@ -184,18 +163,12 @@ if ( !function_exists('generate_spacing_css') ) :
 			),
 			
 			'.both-left.separate-containers .site-main' => array(
-				'margin-top' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-right' => '0px',
-				'margin-bottom' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'margin-left' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'padding' => '0px'
+				'margin' => generate_padding_css( $spacing_settings[ 'separator' ], '0', $spacing_settings[ 'separator' ], $spacing_settings[ 'separator' ] ),
 			),
 			
 			'.separate-containers .inside-right-sidebar, .inside-left-sidebar' => array(
 				'margin-top' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
 				'margin-bottom' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] . 'px' : null,
-				'padding-top' => '0px',
-				'padding-bottom' => '0px'
 			),
 			
 			'.separate-containers .widget, .separate-containers .hentry, .separate-containers .page-header, .widget-area .main-navigation' => array(
@@ -204,23 +177,29 @@ if ( !function_exists('generate_spacing_css') ) :
 			
 			'.both-left.separate-containers .inside-left-sidebar' => array(
 				'margin-right' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] / 2 . 'px' : null,
-				'padding-right' => '0px'
 			),
 			
 			'.both-left.separate-containers .inside-right-sidebar' => array(
 				'margin-left' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] / 2 . 'px' : null,
-				'padding-left' => '0px'
 			),
 			
 			'.both-right.separate-containers .inside-left-sidebar' => array(
 				'margin-right' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] / 2 . 'px' : null,
-				'padding-right' => '0px'
 			),
 
 			'.both-right.separate-containers .inside-right-sidebar' => array(
 				'margin-left' => ( isset( $spacing_settings['separator'] ) ) ? $spacing_settings['separator'] / 2 . 'px' : null,
-				'padding-left' => '0px'
-			)
+			),
+			
+			'.menu-item-has-children ul .dropdown-menu-toggle' => array (
+				'padding-top' => ( isset( $spacing_settings[ 'sub_menu_item_height' ] ) ) ? $spacing_settings[ 'sub_menu_item_height' ] . 'px' : null,
+				'padding-bottom' => ( isset( $spacing_settings[ 'sub_menu_item_height' ] ) ) ? $spacing_settings[ 'sub_menu_item_height' ] . 'px' : null,
+				'margin-top' => ( isset( $spacing_settings[ 'sub_menu_item_height' ] ) ) ? '-' . $spacing_settings[ 'sub_menu_item_height' ] . 'px' : null,
+			),
+			
+			'.menu-item-has-children .dropdown-menu-toggle' => array(
+				'padding-right' => ( isset( $spacing_settings['menu_item'] ) ) ? $spacing_settings['menu_item'] . 'px' : null,
+			),
 			
 		);
 		
@@ -246,8 +225,37 @@ if ( !function_exists('generate_spacing_css') ) :
 			if($elements_added > 0)
 				$output .= $temporary_output;
 		}
+		
+		// Get color settings
+		$generate_settings = wp_parse_args( 
+			get_option( 'generate_settings', array() ), 
+			generate_get_color_defaults() 
+		);
+		
+		// Find out if the content background color and sidebar widget background color is the same
+		$colors_match = false;
+		$sidebar = strtoupper( $generate_settings['sidebar_widget_background_color'] );
+		$content = strtoupper( $generate_settings['content_background_color'] );
+		if ( ( $sidebar == $content ) || '' == $sidebar ) :
+			$colors_match = true;
+		endif;
+		
+		// Put all of our widget padding into an array
+		$widget_padding = array(
+			$spacing_settings[ 'widget_top' ], 
+			$spacing_settings[ 'widget_right' ], 
+			$spacing_settings[ 'widget_bottom' ], 
+			$spacing_settings[ 'widget_left' ]
+		);
+		
+		// If they're all 40 (default), remove the padding when one container is set
+		// This way, the user can still adjust the padding and it will work (unless they want 40px padding)
+		// We'll also remove the padding if there's no color difference between the widgets and content background color
+		if ( count( array_unique( $widget_padding ) ) === 1 && end( $widget_padding ) === '40' && $colors_match ) {
+			$output .= '.one-container .sidebar .widget{padding:0px;}';
+		}
 
-		$output = str_replace(array("\r", "\n"), '', $output);
+		$output = str_replace(array("\r", "\n", "\t"), '', $output);
 		return $output; 
 	}
 	
@@ -262,11 +270,11 @@ if ( !function_exists('generate_spacing_css') ) :
 	}
 endif;
 
-if ( ! function_exists( 'generate_mobile_search_spacing_fallback' ) ) :
+if ( ! function_exists( 'generate_additional_spacing' ) ) :
 /**
  * Add fallback CSS for our mobile search icon color
  */
-function generate_mobile_search_spacing_fallback()
+function generate_additional_spacing()
 {
 	if ( function_exists( 'generate_spacing_get_defaults' ) ) :
 		$spacing_settings = wp_parse_args( 
@@ -283,7 +291,17 @@ function generate_mobile_search_spacing_fallback()
 			'padding-left' => ( isset( $spacing_settings['menu_item'] ) ) ? $spacing_settings['menu_item'] . 'px' : null,
 			'padding-right' => ( isset( $spacing_settings['menu_item'] ) ) ? $spacing_settings['menu_item'] . 'px' : null,
 			'line-height' => ( isset( $spacing_settings['menu_item_height'] ) ) ? $spacing_settings['menu_item_height'] . 'px' : null,
-		)
+		),
+		
+		'.menu-item-has-children ul .dropdown-menu-toggle' => array (
+			'padding-top' => ( isset( $spacing_settings[ 'sub_menu_item_height' ] ) ) ? $spacing_settings[ 'sub_menu_item_height' ] . 'px' : null,
+			'padding-bottom' => ( isset( $spacing_settings[ 'sub_menu_item_height' ] ) ) ? $spacing_settings[ 'sub_menu_item_height' ] . 'px' : null,
+			'margin-top' => ( isset( $spacing_settings[ 'sub_menu_item_height' ] ) ) ? '-' . $spacing_settings[ 'sub_menu_item_height' ] . 'px' : null,
+		),
+		
+		'.menu-item-has-children .dropdown-menu-toggle' => array(
+			'padding-right' => ( isset( $spacing_settings['menu_item'] ) ) ? $spacing_settings['menu_item'] . 'px' : null,
+		),
 		
 	);
 	
@@ -322,6 +340,18 @@ if ( ! function_exists( 'generate_mobile_search_spacing_fallback_css' ) ) :
 add_action( 'wp_enqueue_scripts', 'generate_mobile_search_spacing_fallback_css', 50 );
 function generate_mobile_search_spacing_fallback_css() 
 {
-	wp_add_inline_style( 'generate-style', generate_mobile_search_spacing_fallback() );
+	wp_add_inline_style( 'generate-style', generate_additional_spacing() );
+}
+endif;
+
+if ( ! function_exists( 'generate_padding_css' ) ) :
+function generate_padding_css( $top, $right, $bottom, $left )
+{
+	$padding_top = ( isset( $top ) && '' !== $top ) ? $top . 'px ' : '0px ';
+	$padding_right = ( isset( $right ) && '' !== $right ) ? $right . 'px ' : '0px ';
+	$padding_bottom = ( isset( $bottom ) && '' !== $bottom ) ? $bottom . 'px ' : '0px ';
+	$padding_left = ( isset( $left ) && '' !== $left ) ? $left . 'px' : '0px';
+	
+	return $padding_top . $padding_right . $padding_bottom . $padding_left;
 }
 endif;

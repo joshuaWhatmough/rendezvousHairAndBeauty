@@ -88,7 +88,7 @@ function generate_navigation_position()
 			<?php do_action( 'generate_inside_navigation' ); ?>
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
 				<?php do_action( 'generate_inside_mobile_menu' ); ?>
-				<span class="mobile-menu"><?php echo apply_filters('generate_mobile_menu_label', __( 'Menu', 'generate' ) ); ?></span>
+				<span class="mobile-menu"><?php echo apply_filters('generate_mobile_menu_label', __( 'Menu', 'generatepress' ) ); ?></span>
 			</button>
 			<?php 
 			wp_nav_menu( 
@@ -123,15 +123,94 @@ function generate_menu_fallback( $args )
 		generate_get_defaults() 
 	);
 	?>
-	<div class="main-nav">
+	<div id="primary-menu" class="main-nav">
 		<ul <?php generate_menu_class(); ?>>
 			<?php 
-			wp_list_pages('sort_column=menu_order&title_li=');
+			$args = array(
+				'sort_column' => 'menu_order',
+				'title_li' => '',
+				'walker' => new Generate_Page_Walker()
+			);
+			wp_list_pages( $args );
 			if ( 'enable' == $generate_settings['nav_search'] ) :
-				echo '<li class="search-item" title="' . _x( 'Search', 'submit button', 'generate' ) . '"><a href="#"><i class="fa fa-search"></i></a></li>';
+				echo '<li class="search-item" title="' . _x( 'Search', 'submit button', 'generatepress' ) . '"><a href="#"><i class="fa fa-fw fa-search"></i></a></li>';
 			endif;
 			?>
 		</ul>
 	</div><!-- .main-nav -->
 	<?php 
+}
+
+if ( ! class_exists( 'Generate_Page_Walker' ) ) :
+/**
+ * Add current-menu-item to the current item if no theme location is set
+ * This means we don't have to duplicate CSS properties for current_page_item and current-menu-item
+ *
+ * @since 1.3.21
+ */
+class Generate_Page_Walker extends Walker_page 
+{
+	function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) 
+	{
+		$css_class = array( 'page_item', 'page-item-' . $page->ID );
+		$button = '';
+		
+		if ( isset( $args['pages_with_children'][ $page->ID ] ) ) {
+			$css_class[] = 'menu-item-has-children';
+			$button = '<span role="button" class="dropdown-menu-toggle" aria-expanded="false"></span>';
+		}
+
+		if ( ! empty( $current_page ) ) {
+			$_current_page = get_post( $current_page );
+			if ( $_current_page && in_array( $page->ID, $_current_page->ancestors ) ) {
+				$css_class[] = 'current-menu-ancestor';
+			}
+			if ( $page->ID == $current_page ) {
+				$css_class[] = 'current-menu-item';
+			} elseif ( $_current_page && $page->ID == $_current_page->post_parent ) {
+				$css_class[] = 'current-menu-parent';
+			}
+		} elseif ( $page->ID == get_option('page_for_posts') ) {
+			$css_class[] = 'current-menu-parent';
+		}
+
+		$css_classes = implode( ' ', apply_filters( 'page_css_class', $css_class, $page, $depth, $args, $current_page ) );
+
+		$args['link_before'] = empty( $args['link_before'] ) ? '' : $args['link_before'];
+		$args['link_after'] = empty( $args['link_after'] ) ? '' : $args['link_after'];
+
+		$output .= sprintf(
+			'<li class="%s"><a href="%s">%s%s%s%s</a>',
+			$css_classes,
+			get_permalink( $page->ID ),
+			$args['link_before'],
+			apply_filters( 'the_title', $page->post_title, $page->ID ),
+			$args['link_after'],
+			$button
+		);
+	}
+}
+endif;
+
+/**
+ *
+ * Build the dropdown arrow
+ * @since 1.3.24
+ *
+ */
+add_filter( 'walker_nav_menu_start_el', 'generate_nav_dropdown', 10, 4 );
+function generate_nav_dropdown( $item_output, $item, $depth, $args ) 
+{
+	// If we're working with the primary or secondary theme locations
+	if ( 'primary' == $args->theme_location || 'secondary' == $args->theme_location || 'slideout' == $args->theme_location ) {
+		// If a dropdown menu is detected
+		$dropdown = ( in_array( 'menu-item-has-children', $item->classes ) || in_array( 'page_item_has_children', $item->classes ) ) ? true : false;
+		if ( $dropdown ) :
+			// Add our arrow icon
+			$item_output = str_replace( $args->link_after . '</a>', $args->link_after . '<span role="button" class="dropdown-menu-toggle" aria-expanded="false"></span></a>', $item_output );
+		endif;
+	}
+	
+	// Return the output
+	return $item_output;
 }

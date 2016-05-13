@@ -216,9 +216,6 @@ else
 
 
 <script type="text/javascript">
- function do_select_rep(item)
- {
- }
 
  function do_dexapp_print()
  {
@@ -246,7 +243,7 @@ else
 var $ = jQuery.noConflict();
 $j(document).ready(function(){
 		    /////////////////////////canvas//////////////////////////
-		    $(window).load(function(){
+		    $(window).on('load',function(){
                 drawGraph($("#cardio1"), $("#cardiocontainer1"));
                 drawGraph($("#cardio2"), $("#cardiocontainer2"));
                 function drawGraph(canvas, canvasContainer)

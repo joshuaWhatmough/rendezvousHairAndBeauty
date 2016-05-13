@@ -29,6 +29,9 @@ function generate_body_classes( $classes )
 		generate_get_defaults() 
 	);
 	
+	// Add the GeneratePress class
+	$classes[] = 'generatepress';
+	
 	// Get the layout
 	$layout = generate_get_layout();
 	
@@ -69,6 +72,17 @@ function generate_body_classes( $classes )
 	else :
 		$classes[] = 'header-aligned-left';
 	endif;
+	
+	// Navigation dropdown type
+	if ( 'click' == $generate_settings[ 'nav_dropdown_type' ] ) {
+		$classes[] = 'dropdown-click';
+		$classes[] = 'dropdown-click-menu-item';
+	} elseif ( 'click-arrow' == $generate_settings[ 'nav_dropdown_type' ] ) {
+		$classes[] = 'dropdown-click-arrow';
+		$classes[] = 'dropdown-click';
+	} else {
+		$classes[] = 'dropdown-hover';
+	}
 	
 	// Adds a class of group-blog to blogs with more than 1 published author
 	if ( is_multi_author() ) {

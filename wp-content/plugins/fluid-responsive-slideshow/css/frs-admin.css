@@ -135,6 +135,10 @@
 	padding:20px;	
 }
 
+#frs-modal-form {
+	background: #fff;
+}
+
 .frs-table-left{
 	position: absolute;
 	top: 0;
@@ -143,6 +147,11 @@
 	width: 550px;
 	z-index: 150;
 	padding:20px;
+	background: #fff;
+}
+
+.frs-table-left th {
+	font-size: 14px;
 }
 
 .frs-table-left .minicolors-swatch,
@@ -460,10 +469,7 @@ label {
 }
 
 #frs_ajax_on_progress {
-	background: url('../assets/loading-small.gif');
-	background-position-y: center;
-	background-position-x: 100px;
-	background-repeat: no-repeat;
+	background: #FFF url("../assets/loading-small.gif") no-repeat scroll 100px 50%;
 	position: fixed;
 	display: block;
 	background-color: #fff;

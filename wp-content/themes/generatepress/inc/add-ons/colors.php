@@ -158,7 +158,6 @@ if ( !function_exists('generate_get_color_defaults') && !function_exists('genera
 			),
 			
 			'button.menu-toggle:hover,
-			button.menu-toggle:active,
 			button.menu-toggle:focus,
 			.main-navigation .mobile-bar-items a,
 			.main-navigation .mobile-bar-items a:hover,
@@ -172,14 +171,16 @@ if ( !function_exists('generate_get_color_defaults') && !function_exists('genera
 			),
 			
 			// Navigation background/text on hover
-			'.main-navigation .main-nav ul li > a:hover, 
+			'.main-navigation .main-nav ul li > a:hover,
+			.main-navigation .main-nav ul li > a:focus, 
 			.main-navigation .main-nav ul li.sfHover > a' => array(
 				'color' => $generate_settings['navigation_text_hover_color'],
 				'background-color' => $generate_settings['navigation_background_hover_color']
 			),
 			
 			// Sub-Navigation background/text on hover
-			'.main-navigation .main-nav ul ul li > a:hover, 
+			'.main-navigation .main-nav ul ul li > a:hover,
+			.main-navigation .main-nav ul ul li > a:focus,			
 			.main-navigation .main-nav ul ul li.sfHover > a' => array(
 				'color' => $generate_settings['subnavigation_text_hover_color'],
 				'background-color' => $generate_settings['subnavigation_background_hover_color']
@@ -188,10 +189,7 @@ if ( !function_exists('generate_get_color_defaults') && !function_exists('genera
 			// Navigation background / text current
 			'.main-navigation .main-nav ul .current-menu-item > a, 
 			.main-navigation .main-nav ul .current-menu-parent > a, 
-			.main-navigation .main-nav ul .current-menu-ancestor > a, 
-			.main-navigation .main-nav ul .current_page_item > a, 
-			.main-navigation .main-nav ul .current_page_parent > a, 
-			.main-navigation .main-nav ul .current_page_ancestor > a' => array(
+			.main-navigation .main-nav ul .current-menu-ancestor > a' => array(
 				'color' => $generate_settings['navigation_text_current_color'],
 				'background-color' => $generate_settings['navigation_background_current_color']
 			),
@@ -200,15 +198,9 @@ if ( !function_exists('generate_get_color_defaults') && !function_exists('genera
 			'.main-navigation .main-nav ul .current-menu-item > a:hover, 
 			.main-navigation .main-nav ul .current-menu-parent > a:hover, 
 			.main-navigation .main-nav ul .current-menu-ancestor > a:hover, 
-			.main-navigation .main-nav ul .current_page_item > a:hover, 
-			.main-navigation .main-nav ul .current_page_parent > a:hover, 
-			.main-navigation .main-nav ul .current_page_ancestor > a:hover, 
 			.main-navigation .main-nav ul .current-menu-item.sfHover > a, 
 			.main-navigation .main-nav ul .current-menu-parent.sfHover > a, 
-			.main-navigation .main-nav ul .current-menu-ancestor.sfHover > a, 
-			.main-navigation .main-nav ul .current_page_item.sfHover > a, 
-			.main-navigation .main-nav ul .current_page_parent.sfHover > a, 
-			.main-navigation .main-nav ul .current_page_ancestor.sfHover > a' => array(
+			.main-navigation .main-nav ul .current-menu-ancestor.sfHover > a' => array(
 				'color' => $generate_settings['navigation_text_current_color'],
 				'background-color' => $generate_settings['navigation_background_current_color']
 			),
@@ -216,10 +208,7 @@ if ( !function_exists('generate_get_color_defaults') && !function_exists('genera
 			// Sub-Navigation background / text current
 			'.main-navigation .main-nav ul ul .current-menu-item > a, 
 			.main-navigation .main-nav ul ul .current-menu-parent > a, 
-			.main-navigation .main-nav ul ul .current-menu-ancestor > a, 
-			.main-navigation .main-nav ul ul .current_page_item > a, 
-			.main-navigation .main-nav ul ul .current_page_parent > a, 
-			.main-navigation .main-nav ul ul .current_page_ancestor > a' => array(
+			.main-navigation .main-nav ul ul .current-menu-ancestor > a' => array(
 				'color' => $generate_settings['subnavigation_text_current_color'],
 				'background-color' => $generate_settings['subnavigation_background_current_color']
 			),
@@ -227,16 +216,10 @@ if ( !function_exists('generate_get_color_defaults') && !function_exists('genera
 			// Sub-Navigation current background / text current
 			'.main-navigation .main-nav ul ul .current-menu-item > a:hover, 
 			.main-navigation .main-nav ul ul .current-menu-parent > a:hover, 
-			.main-navigation .main-nav ul ul .current-menu-ancestor > a:hover, 
-			.main-navigation .main-nav ul ul .current_page_item > a:hover, 
-			.main-navigation .main-nav ul ul .current_page_parent > a:hover, 
-			.main-navigation .main-nav ul ul .current_page_ancestor > a:hover,
+			.main-navigation .main-nav ul ul .current-menu-ancestor > a:hover,
 			.main-navigation .main-nav ul ul .current-menu-item.sfHover > a, 
 			.main-navigation .main-nav ul ul .current-menu-parent.sfHover > a, 
-			.main-navigation .main-nav ul ul .current-menu-ancestor.sfHover > a, 
-			.main-navigation .main-nav ul ul .current_page_item.sfHover > a, 
-			.main-navigation .main-nav ul ul .current_page_parent.sfHover > a, 
-			.main-navigation .main-nav ul ul .current_page_ancestor.sfHover > a' => array(
+			.main-navigation .main-nav ul ul .current-menu-ancestor.sfHover > a' => array(
 				'color' => $generate_settings['subnavigation_text_current_color'],
 				'background-color' => $generate_settings['subnavigation_background_current_color']
 			),
@@ -426,12 +409,7 @@ if ( !function_exists('generate_get_color_defaults') && !function_exists('genera
 			html input[type="button"]:focus, 
 			input[type="reset"]:focus, 
 			input[type="submit"]:focus,
-			.button:focus,
-			button:active, 
-			html input[type="button"]:active, 
-			input[type="reset"]:active, 
-			input[type="submit"]:active,
-			.button:active' => array(
+			.button:focus' => array(
 				'background-color' => $generate_settings['form_button_background_color_hover'],
 				'color' => $generate_settings['form_button_text_color_hover']
 			)
@@ -461,13 +439,8 @@ if ( !function_exists('generate_get_color_defaults') && !function_exists('genera
 				$output .= $temporary_output;
 		}
 		
-		$widget_padding = '';
-		if ( $generate_settings['sidebar_widget_background_color'] !== $generate_settings['content_background_color'] ) :
-			$widget_padding = '.one-container .widget{padding:30px;}';
-		endif;
-		
 		$output = str_replace(array("\r", "\n", "\t"), '', $output);
-		return $output . $widget_padding;
+		return $output;
 	}
 	
 	/**

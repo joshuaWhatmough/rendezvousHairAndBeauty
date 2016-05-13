@@ -1,9 +1,9 @@
 <?php
-/*
+/**
  * Plugin Name: Fluid Responsive Slideshow
  * Plugin URI: https://www.tonjoostudio.com/wordpress-plugin-fluid-responsive-slideshow-plugin/
  * Description: Fluid and Responsive Slideshow for wordpress.
- * Version: 2.2.3
+ * Version: 2.2.6
  * Author: tonjoo
  * Author URI: https://www.tonjoostudio.com/
  * License: GPLv2
@@ -12,7 +12,7 @@
  */																																										
 
 define('FRS_DIR_NAME', str_replace("/Fluid-Responsive-Slideshow.php", "", plugin_basename(__FILE__)));
-define('FRS_VERSION','2.2.3');
+define('FRS_VERSION','2.2.6');
 define("FRS_HTTP_PROTO", is_ssl() ? "https://" : "http://");
 
 require_once( plugin_dir_path( __FILE__ ) . 'shortcode.php');
@@ -191,7 +191,6 @@ function frs_media_button( $editor_id )
                 margin-right: 4px;
                 display: inline-block;
                 vertical-align: text-top;
-                background: url(<?php echo plugins_url( dirname( plugin_basename( self::get_file() ) ) . DIRECTORY_SEPARATOR .'images'. DIRECTORY_SEPARATOR .'menu_icon_single_grey.png' ); ?>) no-repeat top left;
             }
         </style>
         <a href="#TB_inline?&inlineId=choose-frs-slider" class="thickbox button insert-slideshow" data-editor="<?php echo esc_attr( $editor_id ); ?>" title="<?php _e( 'Select a FR Slideshow type to insert into post', 'frs' ); ?>"><?php echo '<span class="insert-slideshow-icon"></span>' . __( 'Add Slideshow', 'frs' ); ?></a>
@@ -369,4 +368,101 @@ function frs_print_select_option($options)
                     ";
 
     echo $print_select;
+}
+
+/** 
+ * Display a notice that can be dismissed 
+ */
+add_action('admin_notices', 'frs_premium_notice');
+function frs_premium_notice() 
+{
+    global $current_user ;
+
+    $user_id = $current_user->ID;
+    $ignore_notice = get_user_meta($user_id, 'frs_premium_ignore_notice', true);
+    $ignore_count_notice = get_user_meta($user_id, 'frs_premium_ignore_count_notice', true);
+    $max_count_notice = 15;
+
+    // if usermeta(ignore_count_notice) is not exist
+    if($ignore_count_notice == "")
+    {
+        add_user_meta($user_id, 'frs_premium_ignore_count_notice', $max_count_notice, true);
+
+        $ignore_count_notice = 0;
+    }
+
+    // display the notice or not
+    if($ignore_notice == 'forever')
+    {
+        $is_ignore_notice = true;
+    }
+    else if($ignore_notice == 'later' && $ignore_count_notice < $max_count_notice)
+    {
+        $is_ignore_notice = true;
+
+        update_user_meta($user_id, 'frs_premium_ignore_count_notice', intval($ignore_count_notice) + 1);
+    }
+    else
+    {
+        $is_ignore_notice = false;
+    }
+
+    /* Check that the user hasn't already clicked to ignore the message & if premium not installed */
+    if (! $is_ignore_notice  && ! function_exists("is_frs_premium_exist")) 
+    {
+        echo '<div class="updated"><p>';
+
+        printf(__('Unlock more preset , themes and layer editor. %1$s Get all features of Sangar Slider Pro ! %2$sDo not bug me again%3$sNot Now%4$s',FRS_VERSION), 
+            '<a href="http://sangarslider.com/" target="_blank">', 
+            '</a><span style="float:right;"><a href="?frs_premium_nag_ignore=forever" style="color:#a00;">', 
+            '</a> <a href="?frs_premium_nag_ignore=later" class="button button-primary" style="margin:-5px -5px 0 5px;vertical-align:baseline;">',
+            '</a></span>');
+        
+        echo "</p></div>";
+    }
+}
+
+add_action('admin_init', 'frs_premium_nag_ignore');
+function frs_premium_nag_ignore() 
+{
+    global $current_user;
+    $user_id = $current_user->ID;
+
+    // If user clicks to ignore the notice, add that to their user meta
+    if (isset($_GET['frs_premium_nag_ignore']) && $_GET['frs_premium_nag_ignore'] == 'forever') 
+    {
+        update_user_meta($user_id, 'frs_premium_ignore_notice', 'forever');
+
+        /**
+         * Redirect
+         */
+        $location = admin_url("admin.php?page=frs-setting-page") . '&settings-updated=true';
+        echo "<meta http-equiv='refresh' content='0;url=$location' />";
+        echo "<h2>Loading...</h2>";
+        exit();
+    }
+    else if (isset($_GET['frs_premium_nag_ignore']) && $_GET['frs_premium_nag_ignore'] == 'later') 
+    {
+        update_user_meta($user_id, 'frs_premium_ignore_notice', 'later');
+        update_user_meta($user_id, 'frs_premium_ignore_count_notice', 0);
+
+        $total_ignore_notice = get_user_meta($user_id, 'frs_premium_ignore_count_notice_total', true); 
+
+        if($total_ignore_notice == '') $total_ignore_notice = 0;
+
+        update_user_meta($user_id, 'frs_premium_ignore_count_notice_total', intval($total_ignore_notice) + 1);
+
+        if(intval($total_ignore_notice) >= 5)
+        {
+            update_user_meta($user_id, 'frs_premium_ignore_notice', 'forever');
+        }
+
+        /**
+         * Redirect
+         */
+        $location = admin_url("admin.php?page=frs-setting-page") . '&settings-updated=true';
+        echo "<meta http-equiv='refresh' content='0;url=$location' />";
+        echo "<h2>Loading...</h2>";
+        exit();
+    }
 }

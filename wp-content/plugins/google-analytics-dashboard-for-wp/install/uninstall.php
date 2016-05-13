@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Author: Alin Marcu
  * Author URI: https://deconf.com
+ * Copyright 2013 Alin Marcu 
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -27,5 +27,8 @@ class GADWP_Uninstall {
 			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'gadwp_cache_%%'" );
 			delete_option( 'gadash_options' );
 		}
+		GADWP_Tools::unset_cookie( 'default_metric' );
+		GADWP_Tools::unset_cookie( 'default_dimension' );
+		GADWP_Tools::unset_cookie( 'default_view' );
 	}
 }

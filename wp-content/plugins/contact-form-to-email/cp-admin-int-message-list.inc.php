@@ -34,9 +34,9 @@ else if (isset($_GET['import']) && $_GET['import'] == '1')
             $num = count($data);
             $row++;
             
-            $time  = $data[0];
-            $ip    = $data[1];
-            $email = $data[2];
+            $time  = strip_tags($data[0]);
+            $ip    = strip_tags($data[1]);
+            $email = strip_tags($data[2]);
             
             for ($c=3; $c < $num; $c++)
                 if (isset($form[$c-3]))
@@ -64,7 +64,7 @@ if ($this->item != 0)
 
 $current_page = intval($_GET["p"]);
 if (!$current_page) $current_page = 1;
-$records_per_page = 50;                                                                                  
+$records_per_page = 25;                                                                                  
 
 $cond = '';
 if ($_GET["search"] != '') $cond .= " AND (data like '%".esc_sql($_GET["search"])."%' OR posted_data LIKE '%".esc_sql($_GET["search"])."%')";

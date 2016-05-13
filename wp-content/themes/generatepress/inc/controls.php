@@ -18,8 +18,7 @@ if ( !class_exists('Generate_Customize_Width_Slider_Control') ) :
 		// Override content render function to output slider HTML
 		public function render_content()
 		{ ?>
-			<label><span class="customize-control-title"><?php echo esc_html( $this->label ); ?> - <strong class="value"><?php echo $this->value(); ?></strong>px</span></label>
-			<input name="<?php echo $this->id; ?>" type="text" <?php $this->link(); ?> value="<?php echo $this->value(); ?>" style="display:none" />
+			<label><p style="margin-bottom:0;"><span class="customize-control-title" style="margin:0;display:inline-block;"><?php echo esc_html( $this->label ); ?></span> <span class="value"><input name="<?php echo $this->id; ?>" type="text" <?php $this->link(); ?> value="<?php echo $this->value(); ?>" class="slider-input" /><span class="px">px</span></span></p></label>
 			<div class="slider"></div>
 		<?php
 		}
@@ -29,7 +28,7 @@ if ( !class_exists('Generate_Customize_Width_Slider_Control') ) :
 			
 			wp_enqueue_script( 'jquery-ui-core' );
 			wp_enqueue_script( 'jquery-ui-slider' );
-			wp_enqueue_script( 'generate-slider-js', get_template_directory_uri() . '/js/customcontrol.slider.js', array('jquery'), GENERATE_VERSION );
+			wp_enqueue_script( 'generate-slider-js', get_template_directory_uri() . '/inc/js/customcontrol.slider.js', array('jquery'), GENERATE_VERSION );
 			wp_enqueue_style('jquery-ui-slider', get_template_directory_uri() . '/inc/css/jquery-ui.structure.css');
 			wp_enqueue_style('jquery-ui-slider-theme', get_template_directory_uri() . '/inc/css/jquery-ui.theme.css');
 			
@@ -48,8 +47,8 @@ if ( !class_exists('Generate_Upload_Control') ) :
 			?>
 			<div class='generate-upload'>
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-				<a class="button upload" data-title="<?php _e('Select Image','generate');?>" data-button="<?php _e('Use Image','generate');?>"><?php _e('Upload','generate');?></a>
-				<a class="button remove" <?php if ( empty( $value ) ) { ?>style="display:none;"<?php } ?>><?php _e('Remove','generate'); ?></a>
+				<a class="button upload" data-title="<?php _e('Select Image','generatepress');?>" data-button="<?php _e('Use Image','generatepress');?>"><?php _e('Upload','generatepress');?></a>
+				<a class="button remove" <?php if ( empty( $value ) ) { ?>style="display:none;"<?php } ?>><?php _e('Remove','generatepress'); ?></a>
 				<input type='hidden' value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); ?>/>
 			</div>
 			<?php

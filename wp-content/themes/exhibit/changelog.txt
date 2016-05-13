@@ -1,5 +1,14 @@
 == changelog ==
 
+= 1.03 =
+* Add defaults for mobile typography
+
+(1/28/2016) - 1.02
+* Add footer font size value
+* Add updated defaults to prevent notices
+
+----
+
 (10/5/2015) - 1.01
 * Fix javascript error when no navigation is set
 

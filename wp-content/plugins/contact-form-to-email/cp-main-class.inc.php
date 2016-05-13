@@ -5,7 +5,7 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
     private $menu_parameter = 'cp_contactformtoemail';
     private $prefix = 'cp_contactformtoemail';
     private $plugin_name = 'Contact Form to Email';
-    private $plugin_URL = 'http://wordpress.dwbooster.com/forms/contact-form-to-email';
+    private $plugin_URL = 'http://form2email.dwbooster.com';
     protected $table_items = "cftemail_forms";
     private $table_messages = "cftemail_messages";
     private $print_counter = 1;
@@ -173,7 +173,7 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
     		                           'id' => '',
     	                        ), $atts ) );
         if ($id != '')
-            $this->item = $id;
+            $this->item = intval($id);
         ob_start();
         $this->insert_public_item();
         $buffered_contents = ob_get_contents();
@@ -280,7 +280,7 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
     /* Code for the admin area */
 
     public function plugin_page_links($links) {
-        $customAdjustments_link = '<a href="http://wordpress.dwbooster.com/contact-us">'.__('Request custom changes','contact-form-to-email').'</a>';
+        $customAdjustments_link = '<a href="http://form2email.dwbooster.com/contact-us">'.__('Request custom changes','contact-form-to-email').'</a>';
     	array_unshift($links, $customAdjustments_link);
         $settings_link = '<a href="options-general.php?page='.$this->menu_parameter.'">'.__('Settings','contact-form-to-email').'</a>';
     	array_unshift($links, $settings_link);
@@ -292,7 +292,8 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
 
     public function admin_menu() {
         add_options_page($this->plugin_name.' Options', $this->plugin_name, 'manage_options', $this->menu_parameter, array($this, 'settings_page') );
-        add_menu_page( $this->plugin_name.' Options', $this->plugin_name, 'edit_pages', $this->menu_parameter, array($this, 'settings_page') );
+        add_menu_page( $this->plugin_name.' Options', $this->plugin_name, 'edit_pages', $this->menu_parameter, array($this, 'settings_page') );        
+        add_submenu_page( $this->menu_parameter, 'Help: Online demo', 'Help: Online demo', 'read', $this->menu_parameter."_demo", array($this, 'settings_page') );       
         add_submenu_page( $this->menu_parameter, 'Upgrade', 'Upgrade', 'edit_pages', $this->menu_parameter."_upgrade", array($this, 'settings_page') );
     }
 
@@ -316,9 +317,14 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
         }
         else if ($this->get_param("page") == $this->menu_parameter.'_upgrade')
         {
-            echo("Redirecting to upgrade page...<script type='text/javascript'>document.location='http://wordpress.dwbooster.com/forms/contact-form-to-email#download';</script>");
+            echo("Redirecting to upgrade page...<script type='text/javascript'>document.location='http://form2email.dwbooster.com/download';</script>");
             exit;
         }   
+        else if ($this->get_param("page") == $this->menu_parameter.'_demo')
+        {
+            echo("Redirecting to demo page...<script type='text/javascript'>document.location='http://form2email.dwbooster.com/home#demos';</script>");
+            exit;
+        } 
         else
             @include_once dirname( __FILE__ ) . '/cp-admin-int-list.inc.php';
     }
@@ -330,7 +336,7 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
             wp_deregister_script('query-stringify');
             wp_register_script('query-stringify', plugins_url('/js/jQuery.stringify.js', __FILE__));
             wp_enqueue_script( $this->prefix.'_builder_script', plugins_url('/js/fbuilderf.jquery.js', __FILE__),array("jquery","jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","jquery-ui-droppable","jquery-ui-button","query-stringify","jquery-ui-datepicker") );
-            wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+            wp_enqueue_style('jquery-style', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
         }
         if( 'post.php' != $hook  && 'post-new.php' != $hook )
             return;
@@ -377,7 +383,7 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
 
         if ($this->get_param($this->prefix.'_id')) $this->item = $this->get_param($this->prefix.'_id');
 
-        @session_start();
+        if (function_exists('session_start')) @session_start();
         if (isset($_GET["ps"])) $sequence = $_GET["ps"]; else if (isset($_POST["cp_pform_psequence"])) $sequence = $_POST["cp_pform_psequence"];
         if (
                ($this->get_option('cv_enable_captcha', CP_CFEMAIL_DEFAULT_cv_enable_captcha) != 'false') &&
@@ -390,6 +396,8 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
                )
            )
         {
+            $_SESSION['rand_code'.$sequence] = '';
+            setCookie('rand_code'.$sequence, '', time()+36000,"/");           
             echo 'captchafailed';
             exit;
         }
@@ -447,6 +455,9 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
                 // else {print_r($movefile);exit;}    // un-comment this line if the uploads aren't working
             }
         $buffer_A = $buffer;
+        
+        $_SESSION['rand_code'.$sequence] = '';
+        setCookie('rand_code'.$sequence, '', time()+36000,"/");                   
 
         // insert into database
         //---------------------------
@@ -454,7 +465,7 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
         $rows_affected = $wpdb->insert( $wpdb->prefix.$this->table_messages, array( 'formid' => $this->item,
                                                                                     'time' => current_time('mysql'),
                                                                                     'ipaddr' => $_SERVER['REMOTE_ADDR'],
-                                                                                    'notifyto' => $_POST[$to.$sequence],
+                                                                                    'notifyto' => (@$_POST[$to.$sequence]?$_POST[$to.$sequence]:''),
                                                                                     'posted_data' => serialize($params),
                                                                                     'data' =>$buffer_A
                                                                                    ) );
@@ -479,7 +490,7 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
         $filename = $uploadfiles['name'];
         $filetype = wp_check_filetype( basename( $filename ), null );
 
-        if ( in_array ($filetype["ext"],array("php","asp","aspx","cgi","pl","perl","exe")) )
+        if ( in_array ($filetype["ext"],array("php","asp","aspx","cgi","pl","perl","exe","cmd")) )
             return false;
         else
             return true;
@@ -582,10 +593,19 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
     function save_options()
     {
         global $wpdb;
+        
+        $verify_nonce = wp_verify_nonce( $_POST['rsave'], 'cfpoll_update_actions_post');
+        if (!$verify_nonce)
+        {
+            echo 'Error: Form cannot be authenticated. Please contact our <a href="http://form2email.dwbooster.com/contact-us">support service</a> for verification and solution. Thank you.';
+            return;
+        }
+                
         $this->item = $_POST[$this->prefix."_id"];
 
         foreach ($_POST as $item => $value)
-            $_POST[$item] = stripcslashes($value);
+            if (!is_array($value))
+                $_POST[$item] = stripcslashes($value);
 
         $this->add_field_verify($wpdb->prefix.$this->table_items, "fp_emailfrommethod", "VARCHAR(10)");
         $this->add_field_verify($wpdb->prefix.$this->table_items, "rep_enable", "VARCHAR(10)");
@@ -670,7 +690,8 @@ class CP_ContactFormToEmail extends CP_CFTEMAIL_BaseClass {
 
 
     function generateSafeFileName($filename) {
-        $filename = strtolower($filename);
+        $filename = strtolower(strip_tags($filename));
+        $filename = str_replace(";","_",$filename);
         $filename = str_replace("#","_",$filename);
         $filename = str_replace(" ","_",$filename);
         $filename = str_replace("'","",$filename);

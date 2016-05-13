@@ -1,9 +1,9 @@
 === Contact Form to Email ===
 Contributors: codepeople
-Donate link: http://wordpress.dwbooster.com/forms/contact-form-to-email
+Donate link: http://form2email.dwbooster.com/download
 Tags: contact form,contact,email,contact form database,form,contact form excel,feedback,captcha,contact form plugin,form to email,form to database,contact form builder,form to csv,wordpress contact form,csv,contact form reports,form to excel,contact form csv,drag and drop contact form,excel
 Requires at least: 3.0.5
-Tested up to: 4.4
+Tested up to: 4.5
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -46,7 +46,7 @@ In addition to that basic feature it also **saves the contact form data into a d
 
  = More features = 
  
- There are also commercial versions of the Contact Form to Email with other features not listed here that can be get at http://wordpress.dwbooster.com/forms/contact-form-to-email#download
+ There are also commercial versions of the Contact Form to Email with other features not listed here that can be get at http://form2email.dwbooster.com/download
 
 = Messages List =
 
@@ -349,7 +349,7 @@ The styles can be applied into any of the CSS files of your theme or into the CS
 
 For further modifications the submit button is located at the end of the file "cp-public-int.inc.php".
 
-For general CSS styles modifications to the form and samples check this FAQ entry: http://wordpress.dwbooster.com/faq/contact-form-to-email#q77
+For general CSS styles modifications to the form and samples check this FAQ entry: http://form2email.dwbooster.com/faq#q82
 
 
 = Customizing the automatic email reports =  
@@ -432,83 +432,24 @@ When you click a field already added into the contact form builder area, you can
 
 == Changelog ==
 
-= 1.0 =
-* First Contact Form to Email stable version released.
-* More configuration options added on the contact form settings area.
+= 1.1.32 =
+* Compatible with WP 4.5
 
-= 1.01 =
-* Compatible with the latest WP versions
-* New automatic CSV report options
-* Added functional form builder
-* Improved CSS styles to avoid CSS conflicts
-* Fixed conflict of the captcha image with some third party plugins
-* Fixed bug in pagination links
-* New feature for adding submission number into the emails
-* Fixed bug with back slashes on submissions
+= 1.1.33 =
+* Slashes escape fix
 
+= 1.1.34 =
+* jQuery deprecated functions replaced
 
-= 1.1.2 =
-* Compatible with the latest WP versions
-* Improved translation code, compatible with the latest WP versions
-* New translations
-* Auto-detection and auto-solution for captcha image issues in servers with problem with the PHP sessions configuration
-* Fixed warning that appeared with PHP safe mode restrictions 
-* Sanitized GET parameters used in queries
+= 1.1.35 =
+* Fixed bug in throubleshoot area
 
-
-= 1.1.3 =
-* Sanitized parameters used in SQL queries.
-* Support for large forms.
-* Improved translations.
-* Compatible with the latest WordPress 4.2.x version
-
-= 1.1.4 =
-* Compatible with the WordPress 4.2.2 version
-
-= 1.1.5 =
-* Removed use of esc_sql for numeric values
-* Fixed XSS vulnerability
-* Fixed bug in translation functions.
-
-= 1.1.6 =
-* Compatible with the latest WordPress 4.2.3
-* Update to messages list.
-* Better code for captcha image generation.
-* Fixed conflict with zLib library
-* Update to the captcha generation to add content-length header
-
-= 1.1.7 =
-* Update to the h2-h1 tags in the admin interface
-* Fixed bug with the tabs
-* Fixed initialization bug in reports
-* Fixed typo in dutch language
-* Removed unneeded data from the post process
-
-= 1.1.8 =
-* Fixed CSV sample format
-* Updated support links
-
-= 1.1.9 =
-* Default settings updated
-
-= 1.1.10 =
-* Support new charsets
-
-= 1.1.11 =
-* Interface modifications
-
-= 1.1.12 =
-* Updates to admin interface
-
-= 1.1.13 =
-* Form validation is now activated from the form builder
-
-= 1.1.14 =
-* Tested and compatible with WordPress 4.4
+= 1.1.36 =
+* Old changelogs placed in changelog.txt
 
 == Upgrade Notice ==
 
-= 1.1.14 =
-* Tested and compatible with WordPress 4.4
+= 1.1.36 =
+* Old changelogs placed in changelog.txt
 
-Important note: If you are using the Professional version don't update via the WP dashboard but using your personal update link. Contact us if you need further information: http://wordpress.dwbooster.com/support
+Important note: If you are using the Professional version don't update via the WP dashboard but using your personal update link. Contact us if you need further information: http://form2email.dwbooster.com/contact-us

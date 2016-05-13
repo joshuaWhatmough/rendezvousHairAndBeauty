@@ -106,7 +106,7 @@ function pjc_slideshow_tab($current = 'plugin')
 		<!-- <p>You can add, edit, delete and re order your slide on this page. Drag the images to change slide ordering</p> -->
 		<p>
 			The configuration page. You can add, edit, delete or re-order your slideshow. &nbsp;&nbsp;
-			<a href="javascript:;" class="button button-orange button-frs" onclick="javascript:startTour();">How to use ?</a>
+			<a href="javascript:;" class="button button-orange button-frs" id="frs-how-to-use">How to use ?</a>
 			<a href="http://wordpress.org/support/view/plugin-reviews/fluid-responsive-slideshow?rate=5#postform" target="_blank" style="margin-left:10px;">Enjoy the plugin?, rate us!</a>
 		</p>
 

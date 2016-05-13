@@ -31,7 +31,7 @@ class Generate_Google_Font_Dropdown_Custom_Control extends WP_Customize_Control
                 <label>
                     <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
                     <select <?php $this->link(); ?> class="fonts" data-value="<?php echo $this->value();?>">
-						<optgroup label="<?php _e( 'Default fonts', 'generate' ) ?>" class="default_label">
+						<optgroup label="<?php _e( 'Default fonts', 'generatepress' ) ?>" class="default_label">
 							<?php 
 							printf('<option value="%s" %s>%s</option>', 'inherit', selected($this->value(), 'inherit', false), 'inherit');
 							printf('<option value="%s" %s>%s</option>', 'Arial, Helvetica, sans-serif', selected($this->value(), 'Arial, Helvetica, sans-serif', false), 'Arial');
@@ -50,7 +50,7 @@ class Generate_Google_Font_Dropdown_Custom_Control extends WP_Customize_Control
 							?>
 						</optgroup>
 						
-						<optgroup label="<?php _e( 'Google fonts', 'generate' ) ?>" class="google_label">
+						<optgroup label="<?php _e( 'Google fonts', 'generatepress' ) ?>" class="google_label">
 							<?php
 							foreach ( $fonts as $k => $fam )
 							{
@@ -59,7 +59,7 @@ class Generate_Google_Font_Dropdown_Custom_Control extends WP_Customize_Control
 							?>
 						</optgroup>
                     </select>
-					<p class="description"><?php _e('Font family','generate'); ?></p>
+					<p class="description"><?php _e('Font family','generatepress'); ?></p>
                 </label>
             <?php
         }
@@ -166,9 +166,8 @@ if ( !class_exists('Generate_Customize_Slider_Control') ) :
 		// Override content render function to output slider HTML
 		public function render_content()
 		{ ?>
-			<input name="<?php echo $this->id; ?>" type="text" <?php $this->link(); ?> value="<?php echo $this->value(); ?>" style="display:none" />
+			<label><p class="description"><?php echo esc_html( $this->label ); ?> <span class="value"><input name="<?php echo $this->id; ?>" type="text" <?php $this->link(); ?> value="<?php echo $this->value(); ?>" class="slider-input" /><span class="px">px</span></span></p></label>
 			<div class="slider"></div>
-			<p class="description"><?php echo esc_html( $this->label ); ?> - <strong class="value"><?php echo $this->value(); ?></strong>px</p>
 		<?php
 		}
 		
@@ -177,7 +176,7 @@ if ( !class_exists('Generate_Customize_Slider_Control') ) :
 			
 			wp_enqueue_script( 'jquery-ui-core' );
 			wp_enqueue_script( 'jquery-ui-slider' );
-			wp_enqueue_script( 'generate-slider-js', get_template_directory_uri() . '/js/customcontrol.slider.js', array('jquery'), GENERATE_VERSION );
+			wp_enqueue_script( 'generate-slider-js', get_template_directory_uri() . '/inc/js/customcontrol.slider.js', array('jquery'), GENERATE_VERSION );
 			wp_enqueue_style('jquery-ui-slider', get_template_directory_uri() . '/inc/css/jquery-ui.structure.css');
 			wp_enqueue_style('jquery-ui-slider-theme', get_template_directory_uri() . '/inc/css/jquery-ui.theme.css');
 			

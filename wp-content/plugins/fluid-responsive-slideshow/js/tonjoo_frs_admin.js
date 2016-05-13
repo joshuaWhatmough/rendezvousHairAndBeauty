@@ -654,7 +654,11 @@ jQuery(document).ready(function($){
 		$('[media-upload-id]').val('');
 
 		$('[media-upload-image]').attr('src',$(this).data('image-default'));
-	})	
+	})
+
+	$('#frs-how-to-use').on('click',function(){
+		startTour();
+	})
 
 	function startTour() {
 		var tour = introJs();
