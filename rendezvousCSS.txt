@@ -1,0 +1,23 @@
+// My CSS
+.footerImages{
+margin: auto;
+display: inline;
+}
+.footerImg{
+min-width: 50px;
+height: 49px;
+}
+h1{
+text-align: center;
+}
+.entry-content{
+text-align: center;
+margin: auto;
+}
+#footer-widgets{text-align: center;}
+.leftAligned{margin-left: 20px;
+text-align: left;
+}
+@media screen and (max-width: 500px){
+.leftAligned{margin-left: 0px;}
+}
